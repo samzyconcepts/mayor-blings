@@ -1,11 +1,9 @@
-import Button from "./components/ui/Button";
-import Input from "./components/ui/Input";
+import Navbar from "./components/Navbar";
 
 function App() {
     return (
         <>
-            <Input inputType="text" placeholder="Search"></Input>
-            <Button variant="secondary">click me</Button>
+            <Navbar />
         </>
     );
 }
