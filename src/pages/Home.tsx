@@ -5,6 +5,7 @@ import FeaturedPRD from "../components/FeaturedPRD";
 
 // images
 import HeroImg from "../assets/hero-image.jpg";
+import Footer from "../components/Footer";
 
 function Home() {
     return (
@@ -22,6 +23,7 @@ function Home() {
             </header>
             <Categories />
             <FeaturedPRD />
+            <Footer/>
         </>
     );
 }
