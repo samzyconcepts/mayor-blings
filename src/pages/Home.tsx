@@ -1,6 +1,7 @@
 // Components
 import Navbar from "../components/Navbar";
 import Categories from "../components/Categories";
+import FeaturedPRD from "../components/FeaturedPRD";
 
 // images
 import HeroImg from "../assets/hero-image.jpg";
@@ -19,7 +20,8 @@ function Home() {
                     <img className="mt-8" src={HeroImg} alt="Jewelries" />
                 </div>
             </header>
-            <Categories />  
+            <Categories />
+            <FeaturedPRD />
         </>
     );
 }
