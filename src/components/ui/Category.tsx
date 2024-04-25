@@ -5,7 +5,7 @@ interface CategoryProp {
 
 const Category = ({ imgUrl, categoryName }: CategoryProp) => {
     return (
-        <div>
+        <div className="w-fit">
             <div className="w-72 h-80 overflow-hidden">
                 <img src={imgUrl} alt={imgUrl} className="object-cover w-full h-full" />
             </div>

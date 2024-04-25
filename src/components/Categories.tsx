@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import "swiper/css/navigation";
 
 // components
 import Category from "./ui/Category";
 import categoriesList from "../util/categoriesList.json";
+import { Navigation } from "swiper/modules";
 
 const Categories = () => {
     const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -34,16 +36,22 @@ const Categories = () => {
 
             <div className="mt-12">
                 <div className={`lg:hidden ${isMobile ? "" : "hidden"}`}>
-                    <Swiper>
+                    <Swiper
+                        className="swiper"
+                        navigation={true}
+                        slidesPerView={"auto"}
+                        spaceBetween={0}
+                        centeredSlides={true}
+                        modules={[Navigation]}>
                         {categoriesList.map((category, index) => (
-                            <SwiperSlide key={index}>
+                            <SwiperSlide className="flex justify-center" key={index}>
                                 <Category imgUrl={category.imgUrl} categoryName={category.name} />
                             </SwiperSlide>
                         ))}
                     </Swiper>
                 </div>
 
-                <div className="hidden justify-between lg:flex ">
+                <div className="hidden md:flex justify-center flex-wrap gap-4">
                     {categoriesList.map((category, index) => (
                         <Category
                             key={index}
@@ -53,6 +61,14 @@ const Categories = () => {
                     ))}
                 </div>
             </div>
+
+            {/* CSS for changing navigation button color */}
+            <style tsx="true">{`
+                .swiper-button-prev,
+                .swiper-button-next {
+                    color: grey;
+                }
+            `}</style>
         </section>
     );
 };
