@@ -5,13 +5,15 @@ import Input from "./ui/Input";
 import Cart from "./Cart";
 import Account from "./Account";
 
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
     return (
         <nav className=" bg-grey-400">
             <div className="container mx-auto flex items-center justify-between px-2 md:px-0 py-4 md:py-2">
-                <a href="#home" className="text-white">
+                <Link to="/" className="text-white">
                     <img src={logo} alt="mayor blings" className="w-20 md:w-32" />
-                </a>
+                </Link>
                 <div className="relative">
                     <Input
                         inputType="search"
