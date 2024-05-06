@@ -5,10 +5,10 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 
 // components
-import Category from "./ui/Category";
+import Category from "./ui/CategoryItem";
 import categoriesList from "../util/categoriesList.json";
 
-const Categories = () => {
+const CategoriesList = () => {
     const [isMobile, setIsMobile] = useState<boolean>(false);
 
     useEffect(() => {
@@ -72,4 +72,4 @@ const Categories = () => {
         </section>
     );
 };
-export default Categories;
+export default CategoriesList;
