@@ -1,4 +1,8 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../state/store";
+
+// SwiperJs
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -6,11 +10,12 @@ import { Navigation } from "swiper/modules";
 
 // components
 import Category from "./ui/CategoryItem";
-import categoriesList from "../util/categoriesList.json";
 
 const CategoriesList = () => {
     const [isMobile, setIsMobile] = useState<boolean>(false);
+    const categories = useSelector((state: RootState) => state.categories.categories);
 
+    // Checking if the device is mobile
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 768);
@@ -43,22 +48,27 @@ const CategoriesList = () => {
                         spaceBetween={0}
                         centeredSlides={true}
                         modules={[Navigation]}>
-                        {categoriesList.map((category, index) => (
-                            <SwiperSlide className="flex justify-center" key={index}>
-                                <Category imgUrl={category.imgUrl} categoryName={category.name} />
-                            </SwiperSlide>
-                        ))}
+                        {categories &&
+                            categories.map(({ id, category_name, category_image }) => (
+                                <SwiperSlide className="flex justify-center" key={id}>
+                                    <Category
+                                        imgUrl={category_image}
+                                        categoryName={category_name}
+                                    />
+                                </SwiperSlide>
+                            ))}
                     </Swiper>
                 </div>
 
                 <div className="hidden md:flex justify-center flex-wrap gap-4">
-                    {categoriesList.map((category, index) => (
-                        <Category
-                            key={index}
-                            imgUrl={category.imgUrl}
-                            categoryName={category.name}
-                        />
-                    ))}
+                    {categories &&
+                        categories.map(({ id, category_name, category_image }) => (
+                            <Category
+                                key={id}
+                                imgUrl={category_image}
+                                categoryName={category_name}
+                            />
+                        ))}
                 </div>
             </div>
 
