@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import Categories from "./pages/Categories";
 import ProductDetailPage from "./pages/ProductDetailPage";
+import CategoryItemsLayout from "./components/CategoryItemsLayout";
 
 const router = createBrowserRouter([
     {
@@ -13,9 +14,15 @@ const router = createBrowserRouter([
     {
         path: "/category",
         element: <Categories />,
+        children: [
+            {
+                path: ":categoryId",
+                element: <CategoryItemsLayout />,
+            },
+        ],
     },
     {
-        path: "/product",
+        path: "/product/:productId",
         element: <ProductDetailPage />,
     },
 ]);
