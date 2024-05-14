@@ -2,8 +2,22 @@ import { useState } from "react";
 import Button from "./ui/Button";
 import ProductImageSlide from "./ProductImageSlide";
 import { AccordionGroup, Accordion } from "./Accordion";
+import { addItem } from "../state/cart/cartSlice";
+import { useDispatch } from "react-redux";
 
-const ProductDetail = () => {
+interface ProductProp {
+    product_name: string;
+    product_description: string;
+    product_image: string;
+    product_price: string;
+}
+
+interface ProductDetailState {
+    id: string | undefined;
+    product: ProductProp | undefined;
+}
+
+const ProductDetail = ({ id, product }: ProductDetailState) => {
     const [quantity, setQuantity] = useState(1);
 
     const handleIncrement = () => {
@@ -16,11 +30,26 @@ const ProductDetail = () => {
         return setQuantity(quantity - 1);
     };
 
+    // dispatch product to cart
+    const dispatch = useDispatch();
+
+    const handleAddToCart = (product_id: number, product_name: string, quantity: number) => {
+        dispatch(addItem({ id: product_id, name: product_name, quantity }));
+    };
+
+    if (!product || !id) {
+        // Handle case when product is undefined
+        return <div>Loading...</div>;
+    }
+
+    const product_id = parseInt(id)
+    const { product_name, product_description, product_image, product_price } = product;
+
     return (
         <main className="container mx-auto md:mt-10">
             <section className="grid grid-cols-1 md:grid-cols-12 gap-6">
                 <div className="md:col-start-1 md:col-end-9">
-                    <ProductImageSlide />
+                    <ProductImageSlide images={product_image} />
 
                     <div className="hidden md:block">
                         <AccordionGroup>
@@ -54,9 +83,11 @@ const ProductDetail = () => {
                 </div>
                 <div className="px-2 md:px-0 md:col-start-9 md:col-end-13">
                     <h1 className="text-center md:text-left text-xl md:text-4xl">
-                        4MM HALF PEARL & ROPE NECKLACE - WHITE GOLD
+                        {product_name}
                     </h1>
-                    <p className="text-center md:text-left text-base md:text-2xl my-3">₦92,500</p>
+                    <p className="text-center md:text-left text-base md:text-2xl my-3">
+                        {product_price}
+                    </p>
 
                     <hr className="my-4" />
 
@@ -81,13 +112,14 @@ const ProductDetail = () => {
                             </button>
                         </div>
                     </div>
-                    <Button variant="secondary" className="block w-full my-3">
+                    <Button
+                        onClick={() => handleAddToCart(product_id, product_name, quantity)}
+                        variant="secondary"
+                        className="block w-full my-3">
                         Add to Cart
                     </Button>
                     <Button className="block w-full my-3">Buy</Button>
-                    <p className="mt-4">
-                        Exquisite pearl drop earrings with a touch of elegance and sophistication...
-                    </p>
+                    <p className="mt-4">{product_description}</p>
                     <a
                         href="#"
                         className="block mt-2 text-grey-100 hover:text-grey-400 hover:underline">
@@ -95,7 +127,7 @@ const ProductDetail = () => {
                     </a>
                 </div>
             </section>
-            
+
             {/* mobile display for accordion */}
             <div className=" md:hidden">
                 <AccordionGroup>
