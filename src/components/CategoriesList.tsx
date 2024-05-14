@@ -52,6 +52,7 @@ const CategoriesList = () => {
                             categories.map(({ id, category_name, category_image }) => (
                                 <SwiperSlide className="flex justify-center" key={id}>
                                     <Category
+                                        id={id}
                                         imgUrl={category_image}
                                         categoryName={category_name}
                                     />
@@ -65,6 +66,7 @@ const CategoriesList = () => {
                         categories.map(({ id, category_name, category_image }) => (
                             <Category
                                 key={id}
+                                id={id}
                                 imgUrl={category_image}
                                 categoryName={category_name}
                             />
