@@ -1,7 +1,17 @@
+import { useSelector } from "react-redux";
+import { RootState } from "../state/store";
 import Product from "./ui/Product";
 
+interface productState {
+    id: number;
+    product_name: string;
+    product_description?: string;
+    product_image: string;
+    product_quantity?: number;
+    product_price: number;
+}
 const FeaturedPRD = () => {
-    const price = 20;
+    const products = useSelector((state: RootState) => state.products.products);
 
     return (
         <section className="container mx-auto py-10">
@@ -9,12 +19,19 @@ const FeaturedPRD = () => {
                 featured products
             </h1>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4 place-items-center mt-6 md:mt-12 px-4">
-                <Product imgUrl="/images/ring.jpg" name="The One Ring" price={price} />
-                <Product imgUrl="/images/ring.jpg" name="The One Ring" price={price} />
-                <Product imgUrl="/images/ring.jpg" name="The One Ring" price={price} />
-                <Product imgUrl="/images/ring.jpg" name="The One Ring" price={price} />
-                <Product imgUrl="/images/ring.jpg" name="The One Ring" price={price} />
+            <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4  mt-6 md:mt-12 px-4">
+                {products &&
+                    products.map(
+                        ({ id, product_name, product_image, product_price }: productState) => (
+                            <Product
+                                key={id}
+                                id={id}
+                                imgUrl={product_image}
+                                name={product_name}
+                                price={product_price}
+                            />
+                        )
+                    )}
             </div>
         </section>
     );
