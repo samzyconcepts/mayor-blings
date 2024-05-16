@@ -2,8 +2,15 @@ import axios from "axios";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getProductsURL } from "../../util/api";
 
+interface Product {
+    id: number;
+    product_name: string;
+    product_description: string;
+    product_image: string;
+    product_price: number;
+}
 interface productState {
-    products: [];
+    products: Product[];
 }
 
 const initialState: productState = {
