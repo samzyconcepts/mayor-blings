@@ -36,14 +36,14 @@ const Checkout = () => {
             const product = products.find((product) => product.id === item.id);
 
             if (product) {
-                message += `${index + 1}. ${product.product_name} x ${item.quantity} @ $${
+                message += `\n${index + 1}. ${product.product_name} x ${item.quantity} @ $${
                     product.product_price
-                } = $${product.product_price * item.quantity}`;
+                } = $${product.product_price * item.quantity}\n`;
             }
         });
 
         // open whatsapp
-        window.open(`https://wa.me/07038899653/?text=${encodeURIComponent(message)}`, "_blank");
+        window.open(`https://wa.me/08146604258/?text=${encodeURIComponent(message)}`, "_blank");
 
         dispatch(clearCart());
     };
