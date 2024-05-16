@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../state/store";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
     const [cartItemsCount, setCartItemsCount] = useState(0);
 
+    const cartItems = useSelector((state: RootState) => state.cart.items);
+
+    useEffect(() => {
+        setCartItemsCount(cartItems.length);
+    }, [cartItems]);
+
     return (
-        <a
-            href="#"
-            className="flex gap-2 text-white p-2 bg-grey-300 w-fit rounded-lg hover:bg-grey-200">
+        <Link
+            to="/cart"
+            className="relative flex gap-2 text-white p-2 bg-grey-300 w-fit rounded-lg hover:bg-grey-200">
             <svg
                 width="24"
                 height="24"
@@ -46,7 +55,10 @@ const Cart = () => {
             </svg>
 
             <span className="hidden md:block">Cart ({cartItemsCount})</span>
-        </a>
+            <span className="absolute -top-2 -right-1 flex items-center justify-center bg-red-500 rounded-full h-5 w-5 p-2 text-[10px] md:hidden">
+                {cartItemsCount}
+            </span>
+        </Link>
     );
 };
 export default Cart;
