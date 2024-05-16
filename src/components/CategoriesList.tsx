@@ -75,7 +75,7 @@ const CategoriesList = () => {
             </div>
 
             {/* CSS for changing navigation button color */}
-            <style tsx="true">{`
+            <style>{`
                 .swiper-button-prev,
                 .swiper-button-next {
                     color: grey;

@@ -8,6 +8,7 @@ interface Product {
     product_description: string;
     product_image: string;
     product_price: number;
+    category: number;
 }
 interface productState {
     products: Product[];

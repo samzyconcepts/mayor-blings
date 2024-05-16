@@ -8,7 +8,11 @@ const CategoryItemsLayout = () => {
 
     const products = useSelector((state: RootState) => state.products.products);
 
-    const filteredProducts = products.filter((product) => product["category"] == categoryId);
+    if (!categoryId) return <div>loading...</div>;
+    
+    const filteredProducts = products.filter(
+        (product) => product["category"] === parseInt(categoryId)
+    );
 
     return (
         <section className="md:col-start-2 md:col-end-6 grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6 md:mt-0 px-4">
