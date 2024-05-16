@@ -2,10 +2,11 @@
 import Navbar from "../components/Navbar";
 import CategoriesList from "../components/CategoriesList";
 import FeaturedPRD from "../components/FeaturedPRD";
+import Footer from "../components/Footer";
+import ScrollTop from "../util/ScrollTop";
 
 // images
 import HeroImg from "../assets/hero-image.jpg";
-import Footer from "../components/Footer";
 
 function Home() {
     return (
@@ -24,6 +25,7 @@ function Home() {
             <CategoriesList />
             <FeaturedPRD />
             <Footer />
+            <ScrollTop />
         </>
     );
 }

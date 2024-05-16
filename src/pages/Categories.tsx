@@ -1,9 +1,12 @@
 import { Outlet, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../state/store";
+
+// component
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
-import { useSelector } from "react-redux";
-import { RootState } from "../state/store";
+import ScrollTop from "../util/ScrollTop";
 
 function Categories() {
     const { categoryId } = useParams();
@@ -25,6 +28,7 @@ function Categories() {
                 <Outlet />
             </section>
             <Footer />
+            <ScrollTop />
         </>
     );
 }

@@ -7,6 +7,7 @@ import Navbar from "../components/Navbar";
 import ProductDetail from "../components/ProductDetail";
 import FeaturedPRD from "../components/FeaturedPRD";
 import Footer from "../components/Footer";
+import ScrollTop from "../util/ScrollTop";
 
 function ProductDetailPage() {
     const { productId } = useParams();
@@ -21,6 +22,7 @@ function ProductDetailPage() {
             <ProductDetail product={product} id={productId} />
             <FeaturedPRD />
             <Footer />
+            <ScrollTop />
         </>
     );
 }
