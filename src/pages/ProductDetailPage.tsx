@@ -12,14 +12,16 @@ import ScrollTop from "../util/ScrollTop";
 function ProductDetailPage() {
     const { productId } = useParams();
 
-    const product = useSelector((state: RootState) =>
-        state.products.products.find((product) => product["id"] == productId)
-    );
+    const product = useSelector((state: RootState) => state.products.products);
+
+    if (!productId) return <div>loading...</div>;
+
+    const filteredProduct = product.find((product) => product["id"] === parseInt(productId));
 
     return (
         <>
             <Navbar />
-            <ProductDetail product={product} id={productId} />
+            <ProductDetail product={filteredProduct} id={productId} />
             <FeaturedPRD />
             <Footer />
             <ScrollTop />

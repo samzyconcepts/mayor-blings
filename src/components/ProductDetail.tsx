@@ -9,7 +9,7 @@ interface ProductProp {
     product_name: string;
     product_description: string;
     product_image: string;
-    product_price: string;
+    product_price: number;
 }
 
 interface ProductDetailState {
@@ -42,7 +42,7 @@ const ProductDetail = ({ id, product }: ProductDetailState) => {
         return <div>Loading...</div>;
     }
 
-    const product_id = parseInt(id)
+    const product_id = parseInt(id);
     const { product_name, product_description, product_image, product_price } = product;
 
     return (
@@ -82,9 +82,7 @@ const ProductDetail = ({ id, product }: ProductDetailState) => {
                     </div>
                 </div>
                 <div className="px-2 md:px-0 md:col-start-9 md:col-end-13">
-                    <h1 className="text-center md:text-left text-xl md:text-4xl">
-                        {product_name}
-                    </h1>
+                    <h1 className="text-center md:text-left text-xl md:text-4xl">{product_name}</h1>
                     <p className="text-center md:text-left text-base md:text-2xl my-3">
                         {product_price}
                     </p>
