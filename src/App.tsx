@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Categories from "./pages/Categories";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import CategoryItemsLayout from "./components/CategoryItemsLayout";
+import Checkout from "./pages/Checkout";
 
 const router = createBrowserRouter([
     {
@@ -22,8 +23,12 @@ const router = createBrowserRouter([
         ],
     },
     {
-        path: "/product/:productId",
+        path: "/products/:productId",
         element: <ProductDetailPage />,
+    },
+    {
+        path: "/cart",
+        element: <Checkout />,
     },
 ]);
 
