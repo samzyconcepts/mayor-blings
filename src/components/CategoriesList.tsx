@@ -61,6 +61,7 @@ const CategoriesList = () => {
                     </Swiper>
                 </div>
 
+                {/* Desktop display */}
                 <div className="hidden md:flex justify-center flex-wrap gap-4">
                     {categories &&
                         categories.map(({ id, category_name, category_image }) => (
