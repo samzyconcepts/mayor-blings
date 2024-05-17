@@ -14,12 +14,12 @@ const FeaturedPRD = () => {
     const products = useSelector((state: RootState) => state.products.products);
 
     return (
-        <section className="container mx-auto py-10">
+        <section className="container mx-auto py-4 md:py-10">
             <h1 className="uppercase tracking-widest font-medium text-lg md:text-2xl text-center">
                 featured products
             </h1>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4  mt-6 md:mt-12 px-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4  mt-4 md:mt-12 px-4">
                 {products &&
                     products.map(
                         ({ id, product_name, product_image, product_price }: productState) => (

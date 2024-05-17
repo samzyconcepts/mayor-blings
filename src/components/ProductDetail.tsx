@@ -103,6 +103,7 @@ const ProductDetail = ({ id, product }: ProductDetailState) => {
                                 name="quantity"
                                 min="1"
                                 value={quantity}
+                                onChange={() => setQuantity(quantity)}
                                 className="py-2 w-20 text-center outline-none"
                             />
                             <button onClick={handleIncrement} className="py-2 px-4 text-lg">

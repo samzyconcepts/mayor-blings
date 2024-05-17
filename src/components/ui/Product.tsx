@@ -19,15 +19,15 @@ const Product = ({ id, imgUrl, name, price }: ProductProp) => {
     };
 
     return (
-        <div className="p-4 rounded-md bg-grey-50 w-full">
-            <Link
-                to={`/products/${id}`}
-                className="block w-full h-48  lg:h-80 overflow-hidden rounded">
-                <img src={imgUrl} alt={imgUrl} className="object-cover w-full h-full" />
+        <div className="p-2 md:p-4 rounded-md bg-grey-50 w-full">
+            <Link to={`/products/${id}`}>
+                <div className="w-full h-48  lg:h-72 overflow-hidden rounded">
+                    <img src={imgUrl} alt={imgUrl} className="object-cover w-full h-full" />
+                </div>
+                <h1 className="capitalize text-xs md:text-base py-2 md:py-4">{name}</h1>
             </Link>
-            <h1 className="capitalize py-4">{name}</h1>
             <div className="flex flex-col md:flex-row gap-2 md:items-center">
-                <p>$ {price}</p>
+                <p className="text-sm md:text-base">$ {price}</p>
                 <Button onClick={() => handleAddToCart(id, name)}>Add to Cart</Button>
             </div>
         </div>
