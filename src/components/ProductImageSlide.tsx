@@ -70,7 +70,7 @@ const ProductImageSlide = ({ images }: imageProp) => {
                         </SwiperSlide>
                     ))} */}
                     <SwiperSlide>
-                        <div className="w-full h-[322px] mb-10">
+                        <div className="w-full h-[322px] mb-4">
                             <img
                                 src={images}
                                 alt={`Thumbnail ${images}`}

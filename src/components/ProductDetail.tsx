@@ -30,6 +30,13 @@ const ProductDetail = ({ id, product }: ProductDetailState) => {
         return setQuantity(quantity - 1);
     };
 
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = parseInt(e.target.value, 10);
+        if (value >= 1) {
+            setQuantity(value);
+        }
+    };
+
     // dispatch product to cart
     const dispatch = useDispatch();
 
@@ -103,7 +110,7 @@ const ProductDetail = ({ id, product }: ProductDetailState) => {
                                 name="quantity"
                                 min="1"
                                 value={quantity}
-                                onChange={() => setQuantity(quantity)}
+                                onChange={handleChange}
                                 className="py-2 w-20 text-center outline-none"
                             />
                             <button onClick={handleIncrement} className="py-2 px-4 text-lg">
@@ -128,7 +135,7 @@ const ProductDetail = ({ id, product }: ProductDetailState) => {
             </section>
 
             {/* mobile display for accordion */}
-            <div className=" md:hidden">
+            <div className="px-3 md:hidden">
                 <AccordionGroup>
                     <Accordion title="SIZE GUIDE">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum cupiditate
