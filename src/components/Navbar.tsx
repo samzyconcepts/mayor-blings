@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
     return (
-        <nav className=" bg-grey-400">
+        <nav className="sticky top-0 bg-grey-400">
             <div className="container mx-auto flex items-center justify-between px-2 md:px-0 py-4 md:py-2">
                 <Link to="/" className="text-white">
                     <img src={logo} alt="mayor blings" className="w-20 md:w-32" />
