@@ -1,6 +1,7 @@
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../state/store";
-import { removeItem, clearCart } from "../state/cart/cartSlice";
+import { removeItem, clearCart, updateItemQuantity } from "../state/cart/cartSlice";
 
 // component
 import Navbar from "../components/Navbar";
@@ -18,15 +19,22 @@ const Checkout = () => {
     const cartItems = useSelector((state: RootState) => state.cart.items);
     const products = useSelector((state: RootState) => state.products.products);
 
+    const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
+
+    useEffect(() => {
+        const initialQuantities = cartItems.reduce((acc, item) => {
+            acc[item.id] = item.quantity;
+            return acc;
+        }, {} as { [key: number]: number });
+
+        setQuantities(initialQuantities);
+    }, [cartItems]);
+
     const calculateTotal = () => {
-        let totalPrice = 0;
-
-        cartItems.forEach((item) => {
+        return cartItems.reduce((total, item) => {
             const product = products.find((product) => product.id === item.id);
-            if (product) return (totalPrice += product.product_price * item.quantity);
-        });
-
-        return totalPrice;
+            return product ? total + product.product_price * quantities[item.id] : total;
+        }, 0);
     };
 
     const handleCheckout = () => {
@@ -43,9 +51,30 @@ const Checkout = () => {
         });
 
         // open whatsapp
-        window.open(`https://wa.me/08146604258/?text=${encodeURIComponent(message)}`, "_blank");
+        window.open(`https://wa.me/19052439244/?text=${encodeURIComponent(message)}`, "_blank");
 
         dispatch(clearCart());
+    };
+
+    const handleIncrement = (id: number) => {
+        const newQuantity = quantities[id] + 1;
+        setQuantities({ ...quantities, [id]: newQuantity });
+        dispatch(updateItemQuantity({ id, quantity: newQuantity }));
+    };
+
+    const handleDecrement = (id: number) => {
+        if (quantities[id] > 1) {
+            const newQuantity = quantities[id] - 1;
+            setQuantities({ ...quantities, [id]: newQuantity });
+            dispatch(updateItemQuantity({ id, quantity: newQuantity }));
+        }
+    };
+
+    const handleChange = (id: number, value: number) => {
+        if (value >= 1) {
+            setQuantities({ ...quantities, [id]: value });
+            dispatch(updateItemQuantity({ id, quantity: value }));
+        }
     };
 
     return (
@@ -60,14 +89,14 @@ const Checkout = () => {
                         {cartItems.length ? (
                             cartItems.map((item, index) => {
                                 // Find the product in the products store based on item ID
-
                                 const product = products.find(
                                     (product: ProductProp) => product.id == item.id
                                 );
 
-                                if (!product) return <div>Loading...</div>;
+                                if (!product) return <div key={index}>Loading...</div>;
 
                                 const { product_name, product_image, product_price } = product;
+                                const quantity = quantities[item.id];
 
                                 return (
                                     <div
@@ -85,12 +114,48 @@ const Checkout = () => {
                                                     <h1 className="font-semibold  md:text-2xl">
                                                         {product_name}
                                                     </h1>
-                                                    <p className="text-sm md:text-base">Quantity: {item.quantity}</p>
+                                                    <p className="text-sm md:text-base">
+                                                        Quantity: {quantity}
+                                                    </p>
+                                                    <div className="border rounded w-fit">
+                                                        <button
+                                                            onClick={() => {
+                                                                handleDecrement(item.id);
+                                                            }}
+                                                            className="py-2 px-4 text-lg">
+                                                            -
+                                                        </button>
+                                                        <input
+                                                            type="number"
+                                                            id="quantity"
+                                                            name="quantity"
+                                                            min="1"
+                                                            value={quantity}
+                                                            onChange={(e) =>
+                                                                handleChange(
+                                                                    item.id,
+                                                                    parseInt(e.target.value)
+                                                                )
+                                                            }
+                                                            className="py-2 w-20 text-center outline-none"
+                                                        />
+                                                        <button
+                                                            onClick={() => {
+                                                                handleIncrement(item.id);
+                                                            }}
+                                                            className="py-2 px-4 text-lg">
+                                                            +
+                                                        </button>
+                                                    </div>
                                                     <h1 className="font-medium leading-relaxed md:text-xl">
-                                                        $
-                                                        {(product_price * item.quantity).toFixed(2)}
+                                                        ${(product_price * quantity).toFixed(2)}
                                                     </h1>
-                                                    <span onClick={() => dispatch(removeItem(item.id))} className="block underline mt-3 text-red-500 hover:text-red-400 text-sm md:text-base cursor-pointer">
+
+                                                    <span
+                                                        onClick={() =>
+                                                            dispatch(removeItem(item.id))
+                                                        }
+                                                        className="block underline mt-3 text-red-500 hover:text-red-400 text-sm md:text-base cursor-pointer">
                                                         REMOVE
                                                     </span>
                                                 </div>
