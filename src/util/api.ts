@@ -1,4 +1,4 @@
-const base_url = "https://mayor-blings.onrender.com/";
+const base_url = "https://octopus-app-2uj65.ondigitalocean.app/";
 
 // get categories List
 export const getCategoriesURL = () => `${base_url}categories`;
