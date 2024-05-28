@@ -6,6 +6,10 @@ import Categories from "./pages/Categories";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import CategoryItemsLayout from "./components/CategoryItemsLayout";
 import Checkout from "./pages/Checkout";
+import Admin from "./pages/Admin";
+import Dashboard from "./components/admin/Dashboard";
+import Product from "./components/admin/Product";
+import Category from "./components/admin/Category";
 
 const router = createBrowserRouter([
     {
@@ -29,6 +33,24 @@ const router = createBrowserRouter([
     {
         path: "/cart",
         element: <Checkout />,
+    },
+    {
+        path: "/admin",
+        element: <Admin />,
+        children: [
+            {
+                path: "/admin/",
+                element: <Dashboard />,
+            },
+            {
+                path: "/admin/products",
+                element: <Product />,
+            },
+            {
+                path: "/admin/categories",
+                element: <Category />,
+            },
+        ],
     },
 ]);
 
