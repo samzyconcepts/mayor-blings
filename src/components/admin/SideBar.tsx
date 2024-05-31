@@ -7,6 +7,7 @@ const SideBar = () => {
                 <li>
                     <NavLink
                         to="/admin"
+                        end
                         className={({ isActive }) => {
                             return `block pb-2 capitalize ${isActive ? "font-bold" : ""}`;
                         }}>
