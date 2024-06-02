@@ -1,16 +1,5 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
-import Button from "../ui/Button";
-
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { MoreVertical } from "lucide-react";
 
 type CategoryProps = {
     id: number;
@@ -36,31 +25,5 @@ export const columns: ColumnDef<CategoryProps>[] = [
     },
     {
         id: "actions",
-        cell: ({ row }) => {
-            const category = row.original;
-            const categoryId = category.id;
-
-            return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger>
-                        <Button variant="ghost">
-                            <span className="sr-only">Open menu</span>
-                            <MoreVertical className="h-4 w-4" />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem
-                            onClick={() =>
-                                navigator.clipboard.writeText(categoryId.toLocaleString())
-                            }>
-                            Update
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>Delete</DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            );
-        },
     },
 ];
