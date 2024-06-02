@@ -1,8 +1,8 @@
-import logo from "../assets/mayor-blings-logo.png";
+import logo from "@/assets/mayor-blings-logo.png";
 
 // Component
 import Input from "./ui/Input";
-import Cart from "./Cart";
+import Cart from "./ui/Cart";
 import Account from "./Account";
 
 import { Link } from "react-router-dom";

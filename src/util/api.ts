@@ -17,3 +17,19 @@ export const getProductsURL = () => `${base_url}products`;
 // get a product by id
 export const getProductURL = (product_id: number) =>
     `${base_url}products/product?product_id=${product_id}`;
+
+// update product url
+export const updateProductURL = (product_id: number) =>
+    `${base_url}admin/product/update?product_id=${product_id}`;
+
+// delete product url
+export const deleteProductURL = (product_id: number) =>
+    `${base_url}admin/product/delete?product_id=${product_id}`;
+
+// update category url
+export const updateCategoryURL = (category_id: number) =>
+    `${base_url}admin/category/update?category_id=${category_id}`;
+
+// delete category url
+export const deleteCategoryURL = (category_id: number) =>
+    `${base_url}admin/category/delete?category_id=${category_id}`;
