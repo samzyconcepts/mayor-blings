@@ -42,7 +42,7 @@ const UpdateProductModal = ({
                 setLoading(false);
             }
         }
-    }, [productId]);
+    }, [productId, products]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (product) {
