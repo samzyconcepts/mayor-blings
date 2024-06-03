@@ -1,5 +1,5 @@
 import ProductDataTable from "./data-table";
-import { columns as defaultColumns } from "./columns";
+import { columns as defaultColumns, ProductProp } from "./columns";
 import Button from "../ui/Button";
 
 import {
@@ -27,7 +27,7 @@ const ProductTable = ({ onUpdateClick, onDeleteClick }: ProductTableProp) => {
         if (column.id === "actions") {
             return {
                 ...column,
-                cell: ({ row }) => {
+                cell: ({ row }: { row: { original: ProductProp } }) => {
                     const product = row.original;
                     const productId = product.id;
 

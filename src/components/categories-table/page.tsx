@@ -1,5 +1,5 @@
 import CategoryDataTable from "./data-table";
-import { columns as defaultColumns } from "./columns";
+import { columns as defaultColumns, CategoryProps } from "./columns";
 import Button from "../ui/Button";
 
 import {
@@ -29,7 +29,7 @@ const CategoryTable = ({ onUpdateClick, onDeleteClick }: CategoryTableProp) => {
             return {
                 ...column,
 
-                cell: ({ row }) => {
+                cell: ({ row }: { row: { original: CategoryProps } }) => {
                     const category = row.original;
                     const categoryId = category.id;
                     const categoryName = category.category_name;

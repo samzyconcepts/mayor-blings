@@ -1,16 +1,5 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
-// import Button from "../ui/Button";
-
-// import {
-//     DropdownMenu,
-//     DropdownMenuContent,
-//     DropdownMenuItem,
-//     DropdownMenuLabel,
-//     DropdownMenuSeparator,
-//     DropdownMenuTrigger,
-// } from "@/components/ui/dropdown-menu";
-// import { MoreVertical } from "lucide-react";
 
 export type ProductProp = {
     id: number;
