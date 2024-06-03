@@ -11,7 +11,7 @@ const Button = ({ className, type, variant, ...rest }: ButtonProps) => {
 };
 
 const buttonVariants = cva(
-    "py-1.5 px-3 rounded-md cursor-pointer no-underline text-xs transition-all",
+    "py-2 px-4 rounded-md cursor-pointer no-underline text-xs transition-all",
     {
         variants: {
             variant: {
