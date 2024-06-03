@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import apiClient from "@/util/api";
@@ -43,7 +43,7 @@ const UpdateProductModal = ({
         }
     }, [productId, products]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (product) {
             setProduct({
                 ...product,
@@ -52,11 +52,11 @@ const UpdateProductModal = ({
         }
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         if (product && productId) {
             apiClient
-                .post("/admin/product/update", product)
+                .post(`/admin/product/update?product_id=${productId}`, product)
                 .then((response) => {
                     const isSuccess = response.status === 200;
                     onUpdate(isSuccess);

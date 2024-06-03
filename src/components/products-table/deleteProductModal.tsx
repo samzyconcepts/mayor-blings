@@ -1,6 +1,6 @@
-import axios from "axios";
+import apiClient from "@/util/api";
 import Button from "../ui/Button";
-import { deleteProductURL } from "@/util/api";
+import { toast } from "../ui/use-toast";
 
 interface deleteProductModalProps {
     isOpen: boolean;
@@ -9,9 +9,23 @@ interface deleteProductModalProps {
 }
 
 const DeleteProductModal = ({ isOpen, onRequestClose, productId }: deleteProductModalProps) => {
-    const handleDelete = (productId: number | null) => {
-        if(productId){
-            axios.delete(deleteProductURL(productId))
+    const handleDelete = (product_id: number | null) => {
+        if (product_id) {
+            apiClient
+                .delete(`/admin/product/delete?product_id=${product_id}`)
+                .then((response) => {
+                    if (response.status === 204) {
+                        toast({
+                            description: "Product deleted successfully",
+                        });
+                    }
+                })
+                .catch(() => {
+                    toast({
+                        variant: "destructive",
+                        description: "Delete unsuccessful",
+                    });
+                });
         }
     };
 
