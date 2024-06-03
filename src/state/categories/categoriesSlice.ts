@@ -2,17 +2,17 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { getCategoriesURL } from "../../util/api";
 
-// interface Category {
-//     id: number;
-//     category_name: string;
-//     category_description: string;
-//     category_image: string;
-//     created_at: string;
-//     updated_at: string;
-// }
+interface Category {
+    id: number;
+    category_name: string;
+    category_description: string;
+    category_image: string;
+    created_at: string;
+    updated_at: string;
+}
 
 interface CategoriesState {
-    categories: [];
+    categories: Category[];
 }
 
 const initialState: CategoriesState = {
@@ -33,7 +33,7 @@ const categoriesSlice = createSlice({
 export const getCategoriesAsync = createAsyncThunk("categories/getCategoriesAsync", async () => {
     const res = await axios.get(`${getCategoriesURL()}`);
     const categories = await res.data;
-
+    console.log(categories)
     return categories;
 });
 

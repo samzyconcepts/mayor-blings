@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import CategoryTable from "../categories-table/page";
 import Button from "../ui/Button";
 import UpdateCategoryModal from "../categories-table/updateCategoryModal";
@@ -45,10 +46,11 @@ const Category = () => {
         <section className="p-10 col-start-2 col-end-6">
             <div className="flex justify-between items-center">
                 <h1 className="text-2xl">Category</h1>
-                <Button variant="secondary">Create Category</Button>
+                <Link to="create">
+                    <Button variant="secondary">Create Category</Button>
+                </Link>
             </div>
 
-            
             <div className="mt-5">
                 <CategoryTable
                     onUpdateClick={handleUpdateClick}
