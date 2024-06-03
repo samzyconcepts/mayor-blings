@@ -11,7 +11,7 @@ import ScrollTop from "../util/ScrollTop";
 function Categories() {
     const { categoryId } = useParams();
     const categories = useSelector((state: RootState) =>
-        state.categories.categories.filter(({ id }) => id == categoryId)
+        state.categories.categories.filter(({ id }) => {if (categoryId) id === parseInt(categoryId)})
     );
     return (
         <>
