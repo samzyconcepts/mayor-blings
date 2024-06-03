@@ -1,8 +1,7 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/state/store";
-import { updateProductURL } from "@/util/api";
+import apiClient from "@/util/api";
 import Button from "../ui/Button";
 
 type ProductProp = {
@@ -19,7 +18,7 @@ type UpdateProductModalProps = {
     isOpen: boolean;
     onRequestClose: () => void;
     productId: number | null;
-    onUpdate: (product: ProductProp) => void;
+    onUpdate: (status: boolean) => void;
 };
 
 const UpdateProductModal = ({
@@ -56,14 +55,16 @@ const UpdateProductModal = ({
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (product && productId) {
-            axios
-                .put(updateProductURL(productId), product)
+            apiClient
+                .post("/admin/product/update", product)
                 .then((response) => {
-                    onUpdate(response.data);
-                    onRequestClose();
+                    const isSuccess = response.status === 200;
+                    onUpdate(isSuccess);
+
+                    if (isSuccess) onRequestClose();
                 })
-                .catch((error) => {
-                    console.error("Error updating product:", error);
+                .catch(() => {
+                    onUpdate(false);
                 });
         }
     };
