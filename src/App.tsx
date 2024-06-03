@@ -10,6 +10,8 @@ import Admin from "./pages/Admin";
 import Dashboard from "./components/admin/Dashboard";
 import Product from "./components/admin/Product";
 import Category from "./components/admin/Category";
+import CreateCategory from "./components/admin/CreateCategory";
+import CreateProduct from "./components/admin/CreateProduct";
 
 const router = createBrowserRouter([
     {
@@ -47,8 +49,16 @@ const router = createBrowserRouter([
                 element: <Product />,
             },
             {
+                path: "products/create",
+                element: <CreateProduct />,
+            },
+            {
                 path: "categories",
                 element: <Category />,
+            },
+            {
+                path: "categories/create",
+                element: <CreateCategory />,
             },
         ],
     },

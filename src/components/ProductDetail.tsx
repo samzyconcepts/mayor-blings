@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import Button from "./ui/Button";
 import ProductImageSlide from "./ProductImageSlide";
 import { AccordionGroup, Accordion } from "./Accordion";
@@ -30,7 +30,7 @@ const ProductDetail = ({ id, product }: ProductDetailState) => {
         return setQuantity(quantity - 1);
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = parseInt(e.target.value, 10);
         if (value >= 1) {
             setQuantity(value);
