@@ -4,19 +4,16 @@ import CategoryTable from "../categories-table/page";
 import Button from "../ui/Button";
 import UpdateCategoryModal from "../categories-table/updateCategoryModal";
 import DeleteCategoryModal from "../categories-table/deleteCategoryModal";
-
-interface CategoryProp {
-    id: number;
-    category_name: string;
-    category_description: string;
-    category_image: string;
-}
+import { Toaster } from "@/components/ui/toaster";
+import { useToast } from "@/components/ui/use-toast";
 
 const Category = () => {
     const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
     const [selectedCategoryName, setSelectedCategoryName] = useState<string | null>(null);
     const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+    const { toast } = useToast();
 
     const handleUpdateClick = (categoryId: number) => {
         setSelectedCategoryId(categoryId);
@@ -38,8 +35,19 @@ const Category = () => {
         setIsDeleteModalOpen(false);
     };
 
-    const handleUpdate = (result: CategoryProp) => {
-        console.log(result);
+    const handleUpdate = (status: boolean) => {
+        if (status) {
+            toast({
+                title: "Success!",
+                description: "You have successfully updated the category",
+            });
+        } else {
+            toast({
+                variant: "destructive",
+                title: "Failed!",
+                description: "Failed to update the category",
+            });
+        }
     };
 
     return (
@@ -71,6 +79,8 @@ const Category = () => {
                 categoryId={selectedCategoryId}
                 categoryName={selectedCategoryName}
             />
+
+            <Toaster />
         </section>
     );
 };

@@ -1,6 +1,6 @@
-import { deleteCategoryURL } from "@/util/api";
-import axios from "axios";
+import apiClient from "@/util/api";
 import Button from "../ui/Button";
+import { toast } from "../ui/use-toast";
 
 type deleteCategoryModalProps = {
     isOpen: boolean;
@@ -18,7 +18,21 @@ const DeleteCategoryModal = ({
     const handleDelete = (category_id: number | null) => {
         //delete category
         if (category_id) {
-            axios.delete(deleteCategoryURL(category_id));
+            apiClient
+                .delete(`/admin/category/delete?category_id=${category_id}`)
+                .then((response) => {
+                    if (response.status === 204) {
+                        toast({
+                            description: "Category deleted successfully",
+                        });
+                    }
+                })
+                .catch(() => {
+                    toast({
+                        variant: "destructive",
+                        description: "Delete unsuccessful",
+                    });
+                });
         }
     };
 

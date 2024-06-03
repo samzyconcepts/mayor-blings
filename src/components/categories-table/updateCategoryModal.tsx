@@ -1,9 +1,8 @@
-import axios from "axios";
 import { RootState } from "@/state/store";
-import React, { useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Button from "../ui/Button";
-import { updateCategoryURL } from "@/util/api";
+import apiClient from "@/util/api";
 
 interface CategoryProp {
     id: number;
@@ -16,7 +15,7 @@ type updateCategoryModalProps = {
     isOpen: boolean;
     onRequestClose: () => void;
     categoryId: number | null;
-    onUpdate: (category: CategoryProp) => void;
+    onUpdate: (status: boolean) => void;
 };
 
 const UpdateCategoryModal = ({
@@ -42,7 +41,7 @@ const UpdateCategoryModal = ({
         }
     }, [categoryId, categories]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         if (category) {
             const { name, value } = e.target;
 
@@ -53,18 +52,20 @@ const UpdateCategoryModal = ({
         }
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
 
         if (category && categoryId) {
-            axios
-                .post(updateCategoryURL(categoryId), category)
+            apiClient
+                .post(`/admin/category/update?category_id=${categoryId}`, category)
                 .then((response) => {
-                    onUpdate(response.data);
-                    onRequestClose();
+                    const isSuccess = response.status === 200;
+                    onUpdate(isSuccess);
+
+                    if (isSuccess) onRequestClose();
                 })
-                .catch((error) => {
-                    console.error("Error updating product:", error);
+                .catch(() => {
+                    onUpdate(false);
                 });
         }
     };
