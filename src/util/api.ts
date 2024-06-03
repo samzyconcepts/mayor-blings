@@ -1,4 +1,25 @@
+import axios from "axios";
+
 const base_url = "https://octopus-app-2uj65.ondigitalocean.app/";
+
+// Create an Axios instance
+const apiClient = axios.create({
+    baseURL: base_url,
+});
+
+// Add a request interceptor to include the token in the Authorization header
+apiClient.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem("jwtToken"); // Retrieve the token from local storage
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
+
+export default apiClient;
 
 // get categories List
 export const getCategoriesURL = () => `${base_url}categories`;
