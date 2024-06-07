@@ -12,6 +12,8 @@ import Product from "./components/admin/Product";
 import Category from "./components/admin/Category";
 import CreateCategory from "./components/admin/CreateCategory";
 import CreateProduct from "./components/admin/CreateProduct";
+import ProtectedRoute from "./Auth/ProtectedRoute";
+import AdminLogin from "./Auth/adminLogin";
 
 const router = createBrowserRouter([
     {
@@ -38,7 +40,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/admin",
-        element: <Admin />,
+        element: <ProtectedRoute element={<Admin />} />,
         children: [
             {
                 path: "",
@@ -62,6 +64,10 @@ const router = createBrowserRouter([
             },
         ],
     },
+    {
+        path: "/admin/login",
+        element: <AdminLogin />
+    }
 ]);
 
 function App() {
