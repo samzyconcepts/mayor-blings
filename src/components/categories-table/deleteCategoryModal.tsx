@@ -1,4 +1,4 @@
-import apiClient from "@/util/api";
+import useApiClient from "@/util/api";
 import Button from "../ui/Button";
 import { toast } from "../ui/use-toast";
 
@@ -15,16 +15,20 @@ const DeleteCategoryModal = ({
     categoryId,
     categoryName,
 }: deleteCategoryModalProps) => {
+    const apiClient = useApiClient()
+
     const handleDelete = (category_id: number | null) => {
         //delete category
         if (category_id) {
             apiClient
-                .delete(`/admin/category/delete?category_id=${category_id}`)
+                .delete(`admin/category/delete?category_id=${category_id}`)
                 .then((response) => {
-                    if (response.status === 204) {
+                    if (response.status === 200) {
                         toast({
                             description: "Category deleted successfully",
                         });
+
+                        onRequestClose()
                     }
                 })
                 .catch(() => {

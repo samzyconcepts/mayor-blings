@@ -2,7 +2,7 @@ import { RootState } from "@/state/store";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Button from "../ui/Button";
-import apiClient from "@/util/api";
+import useApiClient from "@/util/api";
 
 interface CategoryProp {
     id: number;
@@ -26,6 +26,7 @@ const UpdateCategoryModal = ({
 }: updateCategoryModalProps) => {
     const [category, setCategory] = useState<CategoryProp | null>(null);
     const [loading, setLoading] = useState(false);
+    const apiClient = useApiClient();
 
     const categories = useSelector((state: RootState) => state.categories.categories);
 
@@ -57,7 +58,7 @@ const UpdateCategoryModal = ({
 
         if (category && categoryId) {
             apiClient
-                .post(`/admin/category/update?category_id=${categoryId}`, category)
+                .patch(`admin/category/update?category_id=${categoryId}`, category)
                 .then((response) => {
                     const isSuccess = response.status === 200;
                     onUpdate(isSuccess);
