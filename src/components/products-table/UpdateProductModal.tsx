@@ -1,11 +1,10 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/state/store";
-import apiClient from "@/util/api";
+import useApiClient from "@/util/api";
 import Button from "../ui/Button";
 
 type ProductProp = {
-    id: number;
     product_name: string;
     product_description: string;
     product_image: string;
@@ -29,6 +28,7 @@ const UpdateProductModal = ({
 }: UpdateProductModalProps) => {
     const [product, setProduct] = useState<ProductProp | null>(null);
     const [loading, setLoading] = useState(false);
+    const apiClient = useApiClient();
 
     const products = useSelector((state: RootState) => state.products.products);
 
@@ -54,9 +54,10 @@ const UpdateProductModal = ({
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
+
         if (product && productId) {
             apiClient
-                .post(`/admin/product/update?product_id=${productId}`, product)
+                .patch(`admin/product/update?product_id=${productId}`, product)
                 .then((response) => {
                     const isSuccess = response.status === 200;
                     onUpdate(isSuccess);

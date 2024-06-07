@@ -1,4 +1,4 @@
-import apiClient from "@/util/api";
+import useApiClient from "@/util/api";
 import Button from "../ui/Button";
 import { toast } from "../ui/use-toast";
 
@@ -9,15 +9,19 @@ interface deleteProductModalProps {
 }
 
 const DeleteProductModal = ({ isOpen, onRequestClose, productId }: deleteProductModalProps) => {
+    const apiClient = useApiClient();
+
     const handleDelete = (product_id: number | null) => {
         if (product_id) {
             apiClient
                 .delete(`/admin/product/delete?product_id=${product_id}`)
                 .then((response) => {
-                    if (response.status === 204) {
+                    if (response.status === 200) {
                         toast({
                             description: "Product deleted successfully",
                         });
+
+                        onRequestClose();
                     }
                 })
                 .catch(() => {
