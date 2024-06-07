@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "@/state/store";
-import apiClient from "@/util/api";
+import useApiClient from "@/util/api";
 import { ChangeEvent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -35,6 +35,7 @@ type productValue = {
 const CreateProduct = () => {
     const [imagePreviews, setImagePreviews] = useState<string[]>([]);
     const [images, setImages] = useState<File[]>([]);
+    const apiClient = useApiClient()
 
     const categories = useSelector((state: RootState) => state.categories.categories);
 

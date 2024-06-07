@@ -7,7 +7,7 @@ import Input from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/textarea";
 import Button from "@/components/ui/Button";
 import axios from "axios";
-import apiClient from "@/util/api";
+import useApiClient from "@/util/api";
 
 const categoryValueSchema = z.object({
     name: z
@@ -31,6 +31,8 @@ const CreateCategory = () => {
     } = useForm<categoryValue>({
         resolver: zodResolver(categoryValueSchema),
     });
+
+    const apiClient = useApiClient()
 
     const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
         const file = Array.from(e.target.files as FileList);
@@ -66,11 +68,11 @@ const CreateCategory = () => {
 
             // post category to the back end
             await apiClient.post("/admin/category/create", createData);
-            
+
             reset();
             setImagePreview([]);
-        } catch(error){
-            console.log('Error creating category: ', error)
+        } catch (error) {
+            console.log("Error creating category: ", error);
         }
     };
 
@@ -89,7 +91,9 @@ const CreateCategory = () => {
                         placeholder="Type the category name here."
                         className="block w-full mt-2"
                     />
-                    {errors.name && <p>{errors.name.message}</p>}
+                    {errors.name && (
+                        <p className="text-red-500 text-xs mt-2">{errors.name.message}</p>
+                    )}
                 </label>
 
                 <label htmlFor="description" className="block my-4">
@@ -100,7 +104,9 @@ const CreateCategory = () => {
                         id="description"
                         className="resize-none mt-2"
                     />
-                    {errors.description && <p>{errors.description.message}</p>}
+                    {errors.description && (
+                        <p className="text-red-500 text-xs mt-2">{errors.description.message}</p>
+                    )}
                 </label>
 
                 <label htmlFor="image" className="block my-4">
@@ -111,7 +117,9 @@ const CreateCategory = () => {
                         onChange={handleImageChange}
                         className="block w-full mt-2"
                     />
-                    {errors.image && <p>{errors.image.message}</p>}
+                    {errors.image && (
+                        <p className="text-red-500 text-xs mt-2">{errors.image.message}</p>
+                    )}
                 </label>
 
                 <div className="flex flex-wrap gap-3">
