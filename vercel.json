@@ -4,5 +4,8 @@
             "source": "/(.*)",
             "destination": "/"
         }
-    ]
+    ],
+    "env":{
+        "VITE_APP_CLOUD_NAME":"db8fxjyu8"
+    }
 }
