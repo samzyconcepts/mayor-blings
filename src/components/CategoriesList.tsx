@@ -50,7 +50,7 @@ const CategoriesList = () => {
                         modules={[Navigation]}>
                         {categories &&
                             categories.map(({ id, category_name, category_image }) => (
-                                <SwiperSlide className="flex justify-center" key={id}>
+                                <SwiperSlide key={id}>
                                     <Category
                                         id={id}
                                         imgUrl={category_image}
