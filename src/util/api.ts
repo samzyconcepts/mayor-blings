@@ -1,30 +1,30 @@
 import axios from "axios";
 import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 
-const base_url = "https://octopus-app-2uj65.ondigitalocean.app/";
+// const base_url = "https://octopus-app-2uj65.ondigitalocean.app/";
+const base_url = "https://mayor-blings.onrender.com/";
 
 // Create an Axios instance
 
 // Add a request interceptor to include the token in the Authorization header
-const useApiClient = () =>{
+const useApiClient = () => {
     const authHeader = useAuthHeader();
-    
+
     const apiClient = axios.create({
         baseURL: base_url,
     });
 
     apiClient.interceptors.request.use(
         (config) => {
-    
-            config.headers.Authorization = authHeader;  
-    
+            config.headers.Authorization = authHeader;
+
             return config;
         },
         (error) => Promise.reject(error)
     );
 
-    return apiClient
-}
+    return apiClient;
+};
 
 export default useApiClient;
 
