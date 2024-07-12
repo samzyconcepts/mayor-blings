@@ -15,7 +15,7 @@ const productSchema = z.object({
     name: z
         .string()
         .min(1, { message: "Category name cannot be empty" })
-        .max(50, { message: "Name cannot be more than 50 character" }),
+        .max(200, { message: "Name cannot be more than 200 character" }),
     description: z.string().min(1, { message: "Description cannot be empty" }),
     images: z.array(z.any()).min(1, { message: "At least one image is required" }),
     quantity: z.string().min(1, { message: "Quantity can not be less than one" }),
@@ -35,7 +35,7 @@ type productValue = {
 const CreateProduct = () => {
     const [imagePreviews, setImagePreviews] = useState<string[]>([]);
     const [images, setImages] = useState<File[]>([]);
-    const apiClient = useApiClient()
+    const apiClient = useApiClient();
 
     const categories = useSelector((state: RootState) => state.categories.categories);
 
