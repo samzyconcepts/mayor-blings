@@ -27,7 +27,7 @@ const Product = ({ id, imgUrl, name, price }: ProductProp) => {
                 <h1 className="capitalize text-xs md:text-base py-2 md:py-4">{name}</h1>
             </Link>
             <div className="flex flex-col md:flex-row gap-2 md:items-center">
-                <p className="text-sm md:text-base">$ {price}</p>
+                <p className="text-sm md:text-base">₦ {price}</p>
                 <Button onClick={() => handleAddToCart(id, name)}>Add to Cart</Button>
             </div>
         </div>
