@@ -5,12 +5,12 @@ import useApiClient from "@/util/api";
 import Button from "../ui/Button";
 
 type ProductProp = {
-    product_name: string;
-    product_description: string;
-    product_image: string;
-    product_quantity: number;
-    product_price: number;
-    category: number;
+    name: string;
+    description: string;
+    image: string[];
+    quantity: number;
+    price: number;
+    category: string;
 };
 
 type UpdateProductModalProps = {
@@ -87,7 +87,7 @@ const UpdateProductModal = ({
                                 <input
                                     type="text"
                                     name="product_name"
-                                    value={product.product_name}
+                                    value={product.name}
                                     onChange={handleChange}
                                     className="border p-2 w-full"
                                 />
@@ -96,8 +96,8 @@ const UpdateProductModal = ({
                                 Description:
                                 <input
                                     type="text"
-                                    name="product_description"
-                                    value={product.product_description}
+                                    name="description"
+                                    value={product.description}
                                     onChange={handleChange}
                                     className="border p-2 w-full"
                                 />
@@ -106,8 +106,8 @@ const UpdateProductModal = ({
                                 Quantity:
                                 <input
                                     type="number"
-                                    name="product_quantity"
-                                    value={product.product_quantity}
+                                    name="quantity"
+                                    value={product.quantity}
                                     onChange={handleChange}
                                     className="border p-2 w-full"
                                 />
@@ -116,8 +116,8 @@ const UpdateProductModal = ({
                                 Price:
                                 <input
                                     type="number"
-                                    name="product_price"
-                                    value={product.product_price}
+                                    name="price"
+                                    value={product.price}
                                     onChange={handleChange}
                                     className="border p-2 w-full"
                                 />
