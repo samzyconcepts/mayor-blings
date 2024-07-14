@@ -3,11 +3,11 @@ import { ColumnDef } from "@tanstack/react-table";
 
 export type ProductProp = {
     id: number;
-    product_name: string;
-    product_image: string;
-    product_quantity: number;
-    product_price: number;
-    category: number;
+    name: string;
+    image: string[];
+    quantity: number;
+    price: number;
+    category: string;
 };
 
 export const columns: ColumnDef<ProductProp>[] = [
@@ -16,15 +16,15 @@ export const columns: ColumnDef<ProductProp>[] = [
         header: "Product ID",
     },
     {
-        accessorKey: "product_name",
+        accessorKey: "name",
         header: "Product Name",
     },
     {
-        accessorKey: "product_quantity",
+        accessorKey: "quantity",
         header: "Quantity",
     },
     {
-        accessorKey: "product_price",
+        accessorKey: "price",
         header: "Price",
     },
     {

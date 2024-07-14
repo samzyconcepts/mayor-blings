@@ -4,12 +4,12 @@ import { getProductsURL } from "../../util/api";
 
 interface Product {
     id: number;
-    product_name: string;
-    product_description: string;
-    product_image: string;
-    product_quantity: number;
-    product_price: number;
-    category: number;
+    name: string;
+    description: string;
+    image: string[];
+    quantity: number;
+    price: number;
+    category: string;
 }
 interface productState {
     products: Product[];
@@ -32,7 +32,6 @@ const productsSlice = createSlice({
 
 export const getProductsAsync = createAsyncThunk("products/getProducts", async () => {
     const res = await axios.get(`${getProductsURL()}`);
-
     const products = await res.data;
     return products;
 });

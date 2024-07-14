@@ -4,11 +4,12 @@ import Product from "./ui/Product";
 
 interface productState {
     id: number;
-    product_name: string;
-    product_description?: string;
-    product_image: string;
-    product_quantity?: number;
-    product_price: number;
+    name: string;
+    description: string;
+    image: string[];
+    quantity: number;
+    price: number;
+    category: string;
 }
 const FeaturedPRD = () => {
     const products = useSelector((state: RootState) => state.products.products);
@@ -22,13 +23,13 @@ const FeaturedPRD = () => {
             <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4  mt-4 md:mt-12 px-4">
                 {products &&
                     products.map(
-                        ({ id, product_name, product_image, product_price }: productState) => (
+                        ({ id, name, image, price }: productState) => (
                             <Product
                                 key={id}
                                 id={id}
-                                imgUrl={product_image}
-                                name={product_name}
-                                price={product_price}
+                                imgUrl={image[0]}
+                                name={name}
+                                price={price}
                             />
                         )
                     )}

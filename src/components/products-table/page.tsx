@@ -54,6 +54,18 @@ const ProductTable = ({ onUpdateClick, onDeleteClick }: ProductTableProp) => {
                 },
             };
         }
+
+        if (column.header === "Category") {
+            return {
+                ...column,
+                cell: ({ row }: { row: { original: ProductProp } }) => {
+                    const category = row.original;
+                    const categoryName = category.category
+
+                    return categoryName.charAt(0).toUpperCase() + categoryName.slice(1)
+                },
+            };
+        }
         return column;
     });
 

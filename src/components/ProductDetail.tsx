@@ -6,10 +6,10 @@ import { addItem } from "../state/cart/cartSlice";
 import { useDispatch } from "react-redux";
 
 interface ProductProp {
-    product_name: string;
-    product_description: string;
-    product_image: string;
-    product_price: number;
+    name: string;
+    description: string;
+    image: string[];
+    price: number;
 }
 
 interface ProductDetailState {

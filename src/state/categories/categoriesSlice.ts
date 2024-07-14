@@ -33,7 +33,6 @@ const categoriesSlice = createSlice({
 export const getCategoriesAsync = createAsyncThunk("categories/getCategoriesAsync", async () => {
     const res = await axios.get(`${getCategoriesURL()}`);
     const categories = await res.data;
-    console.log(categories)
     return categories;
 });
 
