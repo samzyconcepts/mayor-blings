@@ -32,7 +32,7 @@ const CreateCategory = () => {
         resolver: zodResolver(categoryValueSchema),
     });
 
-    const apiClient = useApiClient()
+    const apiClient = useApiClient();
 
     const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
         const file = Array.from(e.target.files as FileList);
@@ -50,6 +50,7 @@ const CreateCategory = () => {
 
             formData.append("file", data.image[0]);
             formData.append("upload_preset", "mayorblings");
+            formData.append("folder", "mayorblings");
 
             const response = await axios.post(
                 `https://api.cloudinary.com/v1_1/${

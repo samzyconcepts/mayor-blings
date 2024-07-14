@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { RootState } from "@/state/store";
+// import { useSelector } from "react-redux";
+// import { RootState } from "@/state/store";
 import useApiClient from "@/util/api";
 import { ChangeEvent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -37,7 +37,7 @@ const CreateProduct = () => {
     const [images, setImages] = useState<File[]>([]);
     const apiClient = useApiClient();
 
-    const categories = useSelector((state: RootState) => state.categories.categories);
+    // const categories = useSelector((state: RootState) => state.categories.categories);
 
     const {
         register,
@@ -72,6 +72,7 @@ const CreateProduct = () => {
 
             formData.append("file", image);
             formData.append("upload_preset", "mayorblings");
+            formData.append("folder", "mayorblings");
             return axios.post(
                 `https://api.cloudinary.com/v1_1/${
                     import.meta.env.VITE_APP_CLOUD_NAME
@@ -84,18 +85,18 @@ const CreateProduct = () => {
             const responses = await Promise.all(uploadPromises);
             const imgUrls = responses.map((response) => response.data.secure_url);
 
-            const category = categories?.find(
-                (category) => category["category_name"] === data.category.toLowerCase()
-            );
+            // const category = categories?.find(
+            //     (category) => category["category_name"] === data.category.toLowerCase()
+            // );
 
             // formData for the database
             const formData = {
                 product_name: data.name,
                 product_description: data.description,
-                product_image: imgUrls,
+                images: imgUrls,
                 product_quantity: parseInt(data.quantity),
                 product_price: data.price,
-                category: category?.id,
+                category: data.category.toLowerCase(),
             };
 
             // post product to the back end
