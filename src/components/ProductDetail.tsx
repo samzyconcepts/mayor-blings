@@ -50,13 +50,13 @@ const ProductDetail = ({ id, product }: ProductDetailState) => {
     }
 
     const product_id = parseInt(id);
-    const { product_name, product_description, product_image, product_price } = product;
+    const { name, description, image, price } = product;
 
     return (
         <main className="container mx-auto md:mt-10">
             <section className="grid grid-cols-1 md:grid-cols-12 gap-6">
                 <div className="md:col-start-1 md:col-end-9">
-                    <ProductImageSlide images={product_image} />
+                    <ProductImageSlide images={image} />
 
                     <div className="hidden md:block">
                         <AccordionGroup>
@@ -89,9 +89,9 @@ const ProductDetail = ({ id, product }: ProductDetailState) => {
                     </div>
                 </div>
                 <div className="px-2 md:px-0 md:col-start-9 md:col-end-13">
-                    <h1 className="text-center md:text-left text-xl md:text-4xl">{product_name}</h1>
+                    <h1 className="text-center md:text-left text-xl md:text-4xl">{name}</h1>
                     <p className="text-center md:text-left text-base md:text-2xl my-3">
-                        {product_price}
+                        {price}
                     </p>
 
                     <hr className="my-4" />
@@ -119,13 +119,13 @@ const ProductDetail = ({ id, product }: ProductDetailState) => {
                         </div>
                     </div>
                     <Button
-                        onClick={() => handleAddToCart(product_id, product_name, quantity)}
+                        onClick={() => handleAddToCart(product_id, name, quantity)}
                         variant="secondary"
                         className="block w-full my-3">
                         Add to Cart
                     </Button>
                     <Button className="block w-full my-3">Buy</Button>
-                    <p className="mt-4">{product_description}</p>
+                    <p className="mt-4">{description}</p>
                     <a
                         href="#"
                         className="block mt-2 text-grey-100 hover:text-grey-400 hover:underline">

@@ -9,9 +9,9 @@ import Button from "../components/ui/Button";
 
 interface ProductProp {
     id: number;
-    product_name: string;
-    product_image: string;
-    product_price: number;
+    name: string;
+    image: string[];
+    price: number;
 }
 
 const Checkout = () => {
@@ -33,7 +33,7 @@ const Checkout = () => {
     const calculateTotal = () => {
         return cartItems.reduce((total, item) => {
             const product = products.find((product) => product.id === item.id);
-            return product ? total + product.product_price * quantities[item.id] : total;
+            return product ? total + product.price * quantities[item.id] : total;
         }, 0);
     };
 
@@ -44,9 +44,9 @@ const Checkout = () => {
             const product = products.find((product) => product.id === item.id);
 
             if (product) {
-                message += `\n${index + 1}. ${product.product_name} x ${item.quantity} @ $${
-                    product.product_price
-                } = $${product.product_price * item.quantity}\n`;
+                message += `\n${index + 1}. ${product.name} x ${item.quantity} @ $${
+                    product.price
+                } = $${product.price * item.quantity}\n`;
             }
         });
 
@@ -95,7 +95,7 @@ const Checkout = () => {
 
                                 if (!product) return <div key={index}>Loading...</div>;
 
-                                const { product_name, product_image, product_price } = product;
+                                const { name, image, price } = product;
                                 const quantity = quantities[item.id];
 
                                 return (
@@ -105,14 +105,14 @@ const Checkout = () => {
                                         {product && (
                                             <>
                                                 <img
-                                                    src={product_image}
-                                                    alt={product_name}
+                                                    src={image[0]}
+                                                    alt={name}
                                                     className="w-24 md:w-40"
                                                 />
 
                                                 <div>
                                                     <h1 className="font-semibold  md:text-2xl">
-                                                        {product_name}
+                                                        {name}
                                                     </h1>
                                                     <p className="text-sm md:text-base">
                                                         Quantity: {quantity}
@@ -148,7 +148,7 @@ const Checkout = () => {
                                                         </button>
                                                     </div>
                                                     <h1 className="font-medium leading-relaxed md:text-xl">
-                                                        ${(product_price * quantity).toFixed(2)}
+                                                        ${(price * quantity).toFixed(2)}
                                                     </h1>
 
                                                     <span
