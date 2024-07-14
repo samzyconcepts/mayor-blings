@@ -20,19 +20,11 @@ const FeaturedPRD = () => {
                 featured products
             </h1>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4  mt-4 md:mt-12 px-4">
+            <div className="grid  sm:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4  mt-4 md:mt-12 px-4">
                 {products &&
-                    products.map(
-                        ({ id, name, image, price }: productState) => (
-                            <Product
-                                key={id}
-                                id={id}
-                                imgUrl={image[0]}
-                                name={name}
-                                price={price}
-                            />
-                        )
-                    )}
+                    products.map(({ id, name, image, price }: productState) => (
+                        <Product key={id} id={id} imgUrl={image[0]} name={name} price={price} />
+                    ))}
             </div>
         </section>
     );

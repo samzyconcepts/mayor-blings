@@ -40,7 +40,7 @@ const CategoriesList = () => {
             </h1>
 
             <div className="mt-6 md:mt-12">
-                <div className={`lg:hidden ${isMobile ? "" : "hidden"}`}>
+                <div className={`md:hidden ${isMobile ? "" : "hidden"}`}>
                     <Swiper
                         className="swiper"
                         navigation={true}
