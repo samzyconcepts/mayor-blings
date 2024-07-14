@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 interface CategoryProp {
-    id: number;
+    id?: number;
     imgUrl: string;
     categoryName: string;
 }
 
-const Category = ({ id, imgUrl, categoryName }: CategoryProp) => {
+const Category = ({ imgUrl, categoryName }: CategoryProp) => {
     return (
-        <Link to={`/category/${id}`} className="flex flex-col items-center w-full md:w-fit">
+        <Link to={`/category/${categoryName}`} className="flex flex-col items-center w-full md:w-fit">
             <div className="w-52 h-56 overflow-hidden flex justify-center items-center bg-green-300">
                 <img src={imgUrl} alt={imgUrl} className="object-cover w-full h-full" />
             </div>

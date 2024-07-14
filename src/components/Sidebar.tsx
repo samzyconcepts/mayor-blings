@@ -23,7 +23,7 @@ const Sidebar = () => {
                 {categories.map(({ id, category_name }) => (
                     <li key={id}>
                         <NavLink
-                            to={`/category/${id}`}
+                            to={`/category/${category_name}`}
                             className={({ isActive }) => {
                                 return `block pb-2 capitalize ${isActive ? "font-bold" : ""}`;
                             }}>

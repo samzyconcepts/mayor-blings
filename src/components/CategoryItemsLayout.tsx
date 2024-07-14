@@ -9,20 +9,18 @@ const CategoryItemsLayout = () => {
     const products = useSelector((state: RootState) => state.products.products);
 
     if (!categoryId) return <div>loading...</div>;
-    
-    const filteredProducts = products.filter(
-        (product) => product["category"] === parseInt(categoryId)
-    );
+
+    const filteredProducts = products.filter((product) => product["category"] === categoryId);
 
     return (
         <section className="md:col-start-2 md:col-end-6 grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6 md:mt-0 px-4">
-            {filteredProducts.map(({ id, product_name, product_image, product_price }) => (
+            {filteredProducts.map(({ id, name, image, price }) => (
                 <Product
                     key={id}
                     id={id}
-                    imgUrl={product_image}
-                    name={product_name}
-                    price={product_price}
+                    imgUrl={image[0]}
+                    name={name}
+                    price={price}
                 />
             ))}
         </section>
