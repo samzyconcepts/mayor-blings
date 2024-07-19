@@ -1,11 +1,10 @@
 import axios from "axios";
-// import { useSelector } from "react-redux";
-// import { RootState } from "@/state/store";
 import useApiClient from "@/util/api";
 import { ChangeEvent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { useNavigate } from "react-router-dom";
 
 import Input from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,7 +13,7 @@ import Button from "@/components/ui/Button";
 const productSchema = z.object({
     name: z
         .string()
-        .min(1, { message: "Category name cannot be empty" })
+        .min(5, { message: "Category name cannot be empty" })
         .max(200, { message: "Name cannot be more than 200 character" }),
     description: z.string().min(1, { message: "Description cannot be empty" }),
     images: z.array(z.any()).min(1, { message: "At least one image is required" }),
@@ -35,9 +34,9 @@ type productValue = {
 const CreateProduct = () => {
     const [imagePreviews, setImagePreviews] = useState<string[]>([]);
     const [images, setImages] = useState<File[]>([]);
-    const apiClient = useApiClient();
 
-    // const categories = useSelector((state: RootState) => state.categories.categories);
+    const apiClient = useApiClient();
+    const navigate = useNavigate()
 
     const {
         register,
@@ -85,26 +84,24 @@ const CreateProduct = () => {
             const responses = await Promise.all(uploadPromises);
             const imgUrls = responses.map((response) => response.data.secure_url);
 
-            // const category = categories?.find(
-            //     (category) => category["category_name"] === data.category.toLowerCase()
-            // );
-
             // formData for the database
             const formData = {
+                category: data.category.toLowerCase(),
                 product_name: data.name,
                 product_description: data.description,
-                images: imgUrls,
                 product_quantity: parseInt(data.quantity),
                 product_price: data.price,
-                category: data.category.toLowerCase(),
+                images: imgUrls,
             };
 
-            // post product to the back end
-            await apiClient.post("/admin/product/create", formData);
+            await apiClient.post("/admin/product/create", formData, {
+                headers: { "Content-Type": "application/json" },
+            });
 
             reset();
             setImagePreviews([]);
             setImages([]);
+            navigate('/admin/products')
         } catch (error) {
             console.log("Error creating product: ", error);
         }
@@ -221,8 +218,36 @@ const CreateProduct = () => {
                     ))}
                 </div>
 
-                <Button type="submit" disabled={isSubmitting} className="block mt-2 w-full">
-                    Create
+                <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className=" relative block mt-2 w-full">
+                    {isSubmitting ? (
+                        <div className="flex items-center gap-2">
+                            <svg
+                                className="w-5 h-5 animate-spin text-white"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24">
+                                <circle
+                                    className="opacity-25"
+                                    cx="12"
+                                    cy="12"
+                                    r="10"
+                                    stroke="currentColor"
+                                    strokeWidth="4"
+                                />
+                                <path
+                                    className="opacity-75"
+                                    fill="currentColor"
+                                    d="M4 12a8 8 0 0116 0H4z"
+                                />
+                            </svg>
+                            Creating...
+                        </div>
+                    ) : (
+                        "Create"
+                    )}
                 </Button>
             </form>
         </section>
