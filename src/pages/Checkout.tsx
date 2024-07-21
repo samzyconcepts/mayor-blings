@@ -44,9 +44,9 @@ const Checkout = () => {
             const product = products.find((product) => product.id === item.id);
 
             if (product) {
-                message += `\n${index + 1}. ${product.name} x ${item.quantity} @ $${
+                message += `\n${index + 1}. ${product.name} x ${item.quantity} @ ₦${
                     product.price
-                } = $${product.price * item.quantity}\n`;
+                } = ₦${product.price * item.quantity}\n`;
             }
         });
 
